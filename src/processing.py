@@ -1,25 +1,26 @@
-from typing import List, Dict
 from datetime import datetime
+from typing import Dict, List
 
-def filter_by_state(transactions: List[Dict[str, str]], state: str = 'EXECUTED') -> List[Dict[str, str]]:
+
+def filter_by_state(transactions: List[Dict[str, object]], state: str = "EXECUTED") -> List[Dict[str, object]]:
     """
-        Фильтрует список транзакций по указанному статусу.
-        """
+    Фильтрует список транзакций по указанному статусу.
+    """
     filtered_list = []
     for dict in transactions:
-        if dict.get('state') == state:
+        if dict.get("state") == state:
             filtered_list.append(dict)
         else:
             continue
     return filtered_list
 
 
-def sort_by_date(operations: List[Dict[str, str]], reverse: bool = True) -> List[Dict[str, str]]:
+def sort_by_date(operations: list[dict[str, object]], reverse: bool = True) -> list[dict[str, object]]:
     """
-     Сортирует список транзакций по дате.
-     """
+    Сортирует список транзакций по дате.
+    """
     sorted_operations = operations.copy()
-    sorted_operations.sort(key=lambda x: datetime.fromisoformat(x["date"]), reverse=reverse)
+    sorted_operations.sort(key=lambda x: datetime.fromisoformat(str(x['date'])), reverse=reverse)
 
     return sorted_operations
 
@@ -27,10 +28,10 @@ def sort_by_date(operations: List[Dict[str, str]], reverse: bool = True) -> List
 # Пример использования
 if __name__ == "__main__":
     transactions = [
-        {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
-        {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
-        {'id': 594226727, 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689'},
-        {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+        {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
+        {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
     ]
 
     # Фильтрация по статусу
