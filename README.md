@@ -22,5 +22,5 @@ pip install -r requirements.txt
 
 Для запуска тестов используйте команду:
 
-```bash
+```
 pytest
