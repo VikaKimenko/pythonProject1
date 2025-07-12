@@ -1,9 +1,30 @@
+import pytest
 from src.widget import get_date, mask_account_card
 
-print(mask_account_card("Maestro 1596837868705199"))
-print(mask_account_card("Счет 64686473678894779589"))
-print(mask_account_card("Visa Classic 6831982476737658"))
-print(mask_account_card("Visa Platinum 8990922113665229"))
-print(mask_account_card("Visa Gold 5999414228426353"))
 
-print(get_date("1981-11-17T00:00:01.136347"))
+@pytest.mark.parametrize("input_str, expected", [
+    ("Visa Platinum 7000792289606361", "Visa Platinum 7000 79** **** 6361"),
+    ("Счет 73654108430135874305", "Счет **4305"),
+    ("Maestro 1234567890123456", "Maestro 1234 56** **** 3456"),
+    ("", "Не найдены цифры в номере"),
+    (12345, "Неверный тип данных"),
+    ("Счет 123", "Некорректная длина номера"),
+    ("Карта без номера", "Не найдены цифры в номере"),
+    ("Счет 7365410843013587430", "Некорректная длина номера"),  # 19 цифр
+    ("Visa Platinum 700079228960636", "Некорректная длина номера"),  # 15 цифр
+])
+def test_mask_account_card(input_str, expected):
+    assert mask_account_card(input_str) == expected
+
+
+@pytest.mark.parametrize("date, expected", [
+    ("2024-03-11T02:26:18.671407", "11.03.2024"),
+    ("2024-03-11", "11.03.2024"),
+    ("", "Неверный формат входных данных"),
+    ("20240311", "Неверный формат входных данных"),
+    (123456789, "Неверный формат входных данных"),
+    ("2024-03-11T02:26:18.6714071234567890", "11.03.2024"),
+    ("2024-03-11T02:26:18", "11.03.2024"),
+])
+def test_get_date(date, expected):
+    assert get_date(date) == expected
