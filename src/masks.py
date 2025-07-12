@@ -1,8 +1,6 @@
 def get_mask_card_number(card_numder: str) -> str:
     """Маскирует 6 цифр номера карты и разбивает на 4 блока."""
-    masked_card_show = (
-        card_numder[:4] + " " + card_numder[4:6] + "**" + " **** " + card_numder[-4:]
-    )
+    masked_card_show = card_numder[:4] + " " + card_numder[4:6] + "**" + " **** " + card_numder[-4:]
     return masked_card_show
 
 
