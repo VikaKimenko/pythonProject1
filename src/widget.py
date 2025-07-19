@@ -34,6 +34,6 @@ def get_date(data_number: str) -> str:
     if not isinstance(data_number, str):
         return "Неверный формат входных данных"
 
-    if len(data_number) >= 10 and data_number[4] == '-' and data_number[7] == '-':
+    if len(data_number) >= 10 and data_number[4] == "-" and data_number[7] == "-":
         return f"{data_number[8:10]}.{data_number[5:7]}.{data_number[:4]}"
     return "Неверный формат входных данных"
