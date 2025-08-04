@@ -7,8 +7,10 @@ T = TypeVar("T")
 
 def log(filename: Union[str, Path, None] = None) -> Callable[[Callable[..., T]], Callable[..., T]]:
     def decorator(func: Callable[..., T]) -> Callable[..., T]:
+        """Декоратор для логирования вызовов функций в файл или консоль"""
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> T:
+            """Логирует вызов функции и возвращает её результат"""
             try:
                 result = func(*args, **kwargs)
                 log_message = f"{func.__name__} ok"
